@@ -53,28 +53,63 @@ abstract class ItemElement {
     // Add name string
     rowItems.add(Text(pad(depth) + name + ": ", style: treeStyle));
 
-    rowItems.add(Container(
-      width: 300,
-      child: TextField(
-        autofocus: true,
-        maxLines: 1,
-        cursorColor: Colors.blue,
-        focusNode:  FocusNode(),
-        controller: con,
-        keyboardType: TextInputType.number,
-        style: TextStyle(fontSize: 20),
-        onChanged: (newValue) {
+    // Input method
+    // Text input
+    if (inputType == "input") {
+      rowItems.add(Container(
+        width: 300,
+        child: TextField(
+          autofocus: true,
+          maxLines: 1,
+          cursorColor: Colors.blue,
+          focusNode:  FocusNode(),
+          controller: con,
+          keyboardType: TextInputType.number,
+          style: TextStyle(fontSize: 20),
+          onChanged: (newValue) {
+            home.setState(() {
+              if (v == 1) {
+                value = int.parse(newValue);
+              }
+              else if (v == 2) {
+                value2 = int.parse(newValue);
+              }
+            });
+          },
+        ),
+      ));
+    }
+    // Dropdown lists
+    else {
+      List<String> possibilityList = [];
+      rowItems.add(DropdownButton<int>(
+        value: id,
+        icon: const Icon(Icons.arrow_downward),
+        iconSize: 24,
+        elevation: 16,
+        style: const TextStyle(
+            color: Colors.deepPurple
+        ),
+        underline: Container(
+          height: 2,
+          color: Colors.deepPurpleAccent,
+        ),
+        onChanged: (int? newValue) {
           home.setState(() {
-            if (v == 1) {
-              value = int.parse(newValue);
-            }
-            else if (v == 2) {
-              value2 = int.parse(newValue);
-            }
+            id = newValue!;
           });
         },
-      ),
-    ));
+        items: List<int>.generate(possibilityList.length, (i) => i + 1)
+            .map<DropdownMenuItem<int>>((int value) {
+          return DropdownMenuItem<int>(
+            value: value-1,
+            child: Text(possibilityList[value-1]),
+          );
+        })
+            .toList(),
+      ));
+    }
+
 
     // Return
     return Row(children: rowItems);

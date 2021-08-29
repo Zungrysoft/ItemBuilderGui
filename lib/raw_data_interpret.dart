@@ -1,26 +1,20 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:item_builder_gui/raw_data.dart';
 
+bool populatedData = false;
+
 List<String> effectIdsList = [];
-void populateEffectIdsList() {
-  LineSplitter ls = new LineSplitter();
-  List<String> lines = ls.convert(effectData);
-  for (int i = 0; i < lines.length; i ++) {
-    // Grab line
-    String d = lines[i];
-    // Remove description
-    d = d.split(" - ")[0];
-    // Remove tabs
-    d = d.replaceAll("\t", "");
-    // Append
-    effectIdsList.add(d);
-  }
-}
-
 List<String> conditionIdsList = [];
-void populateConditionIdsList() {
+List<List<String>> effectIdsListRaw = [];
+List<List<String>> conditionIdsListRaw = [];
+
+
+List<String> stripListData(data) {
   LineSplitter ls = new LineSplitter();
-  List<String> lines = ls.convert(conditionData);
+  List<String> lines = ls.convert(data);
+  List<String> ret = [];
+
   for (int i = 0; i < lines.length; i ++) {
     // Grab line
     String d = lines[i];
@@ -29,69 +23,75 @@ void populateConditionIdsList() {
     // Remove tabs
     d = d.replaceAll("\t", "");
     // Append
-    conditionIdsList.add(d);
+    ret.add(d);
   }
+  return ret;
 }
 
-
-List<List<String>> effectIdsListRaw = [];
-void populateEffectIdsListRaw() {
+void populateData() {
+  populatedData = true;
   LineSplitter ls = new LineSplitter();
-  List<String> lines = ls.convert(effectDataRaw);
+  List<String> lines = [];
+
+  // Effect Id's
+  effectIdsList = stripListData(effectData);
+
+  // Condition Id's
+  conditionIdsList = stripListData(conditionData);
+
+  // Effect Value Input Methods
+  lines = ls.convert(effectDataRaw);
   for (int i = 0; i < lines.length; i ++) {
     effectIdsListRaw.add(lines[i].split(";"));
   }
-}
 
-
-List<List<String>> conditionIdsListRaw = [];
-void populateConditionIdsListRaw() {
-  LineSplitter ls = new LineSplitter();
-  List<String> lines = ls.convert(conditionDataRaw);
+  // Condition Value Input Methods
+  lines = ls.convert(conditionDataRaw);
   for (int i = 0; i < lines.length; i ++) {
     conditionIdsListRaw.add(lines[i].split(";"));
   }
 }
 
+
 String getEffectIdString(int c) {
-  if (effectIdsList.length == 0) {
-    populateEffectIdsList();
+  if (!populatedData) {
+    populateData();
   }
   return effectIdsList[c];
 }
 
 String getConditionIdString(int c) {
-  if (conditionIdsList.length == 0) {
-    populateConditionIdsList();
+  if (!populatedData) {
+    populateData();
   }
   return conditionIdsList[c];
 }
 
 int getEffectCount() {
-  if (effectIdsList.length == 0) {
-    populateEffectIdsList();
+  if (!populatedData) {
+    populateData();
   }
   return effectIdsList.length;
 }
 
 int getConditionCount() {
-  if (conditionIdsList.length == 0) {
-    populateConditionIdsList();
+  if (!populatedData) {
+    populateData();
   }
   return conditionIdsList.length;
 }
 
 
 String getEffectValueString(int c, int p) {
-  if (effectIdsListRaw.length == 0) {
-    populateEffectIdsListRaw();
+  if (!populatedData) {
+    populateData();
   }
   return effectIdsListRaw[c][p];
 }
 
 String getConditionValueString(int c, int p) {
-  if (conditionIdsListRaw.length == 0) {
-    populateConditionIdsListRaw();
+  if (!populatedData) {
+    populateData();
   }
   return conditionIdsListRaw[c][p];
 }
