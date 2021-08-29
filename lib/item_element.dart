@@ -37,6 +37,15 @@ abstract class ItemElement {
       con = controller2;
     }
 
+    // Hard-coded special cases
+    if (inputType == "duration" && this is Effect && v == 2 && value == 32) {
+      inputType = "";
+    }
+    if (inputType == "duration" && this is Effect && v == 2 && value == 36) {
+      name = "Explosion Size";
+      inputType = "input";
+    }
+
     // Special case: no value exists
     if (inputType == "") {
       if (v == 1) {
@@ -81,9 +90,60 @@ abstract class ItemElement {
     }
     // Dropdown lists
     else {
+      // Build possibility list
       List<String> possibilityList = [];
+      if (inputType == "potion_effect") {
+        possibilityList = getPotionEffectIdList();
+      }
+      if (inputType == "duration") {
+        possibilityList = getDurationIdList();
+      }
+      if (inputType == "monster_type") {
+        possibilityList = getMonsterTypeIdList();
+      }
+      if (inputType == "sound") {
+        possibilityList = getSoundIdList();
+      }
+      if (inputType == "resource") {
+        possibilityList = getResourceIdList();
+      }
+      if (inputType == "equipment") {
+        possibilityList = getEquipmentIdList();
+      }
+      if (inputType == "percentage") {
+        possibilityList = ["1%", "5%", "25%"];
+      }
+      if (inputType == "no_knockback_distance_radius") {
+        possibilityList = ["7 Blocks", "15 Blocks", "Unlimited Distance"];
+      }
+      if (inputType == "dropdown-4") {
+        possibilityList = ["1", "2", "3", "4"];
+      }
+      if (inputType == "chance") {
+        possibilityList = ["0.1%", "1%", "5%", "10%", "25%", "33%", "50%"];
+      }
+
+      // Make sure value is within the bounds
+      if (v == 1) {
+        if (value < 1) {
+          value = 1;
+        }
+        else if (value >= possibilityList.length) {
+          value = possibilityList.length;
+        }
+      }
+      else {
+        if (value2 < 1) {
+          value2 = 1;
+        }
+        else if (value2 >= possibilityList.length) {
+          value2 = possibilityList.length;
+        }
+      }
+
+      // Build List
       rowItems.add(DropdownButton<int>(
-        value: id,
+        value: v == 1 ? value : value2,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
         elevation: 16,
@@ -96,13 +156,18 @@ abstract class ItemElement {
         ),
         onChanged: (int? newValue) {
           home.setState(() {
-            id = newValue!;
+            if (v == 1) {
+              value = newValue!;
+            }
+            else if (v == 2) {
+              value2 = newValue!;
+            }
           });
         },
         items: List<int>.generate(possibilityList.length, (i) => i + 1)
             .map<DropdownMenuItem<int>>((int value) {
           return DropdownMenuItem<int>(
-            value: value-1,
+            value: value,
             child: Text(possibilityList[value-1]),
           );
         })

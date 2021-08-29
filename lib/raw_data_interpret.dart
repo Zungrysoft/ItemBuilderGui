@@ -5,10 +5,16 @@ import 'package:item_builder_gui/raw_data.dart';
 bool populatedData = false;
 
 List<String> effectIdsList = [];
-List<String> conditionIdsList = [];
 List<List<String>> effectIdsListRaw = [];
+List<String> conditionIdsList = [];
 List<List<String>> conditionIdsListRaw = [];
-
+List<String> potionEffectIdsList = [];
+List<String> durationIdsList = [];
+List<String> monsterTypeIdsList = [];
+List<String> loadableIdsList = [];
+List<String> soundIdsList = [];
+List<String> resourceIdsList = [];
+List<String> equipmentIdsList = [];
 
 List<String> stripListData(data) {
   LineSplitter ls = new LineSplitter();
@@ -38,6 +44,15 @@ void populateData() {
 
   // Condition Id's
   conditionIdsList = stripListData(conditionData);
+
+  // Other Id's
+  potionEffectIdsList = stripListData(potionEffectData);
+  durationIdsList = stripListData(durationData);
+  monsterTypeIdsList = stripListData(monsterTypeData);
+  loadableIdsList = stripListData(loadableData);
+  soundIdsList = stripListData(soundData);
+  resourceIdsList = stripListData(resourceData);
+  equipmentIdsList = stripListData(equipmentData);
 
   // Effect Value Input Methods
   lines = ls.convert(effectDataRaw);
@@ -94,4 +109,46 @@ String getConditionValueString(int c, int p) {
     populateData();
   }
   return conditionIdsListRaw[c][p];
+}
+
+List<String> getPotionEffectIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return potionEffectIdsList;
+}
+
+List<String> getDurationIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return durationIdsList;
+}
+
+List<String> getMonsterTypeIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return monsterTypeIdsList;
+}
+
+List<String> getSoundIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return soundIdsList;
+}
+
+List<String> getResourceIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return resourceIdsList;
+}
+
+List<String> getEquipmentIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return equipmentIdsList;
 }

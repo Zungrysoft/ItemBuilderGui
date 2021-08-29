@@ -92,16 +92,16 @@ Amount;input;;
 ;;;
 ;;;
 ;;;
-Amplifier;dropdown-4;;
-Amplifier;dropdown-4;;
+Amplifier (max 4);input;;
+Amplifier (max 4);input;;
 ;;;
 ;;;
-Amplifier;dropdown-4;;
-Amplifier;dropdown-4;;
+Amplifier (max 4);input;;
+Amplifier (max 4);input;;
 ;;;
 ;;;
-Amplifier;dropdown-4;;
-Amplifier;dropdown-4;;
+Amplifier (max 4);input;;
+Amplifier (max 4);input;;
 ;;;
 ;;;
 ;;;
@@ -118,22 +118,22 @@ Ticks to Prime For;input;;
 ;;;
 Radius;dropdown-4;;
 ;;;
-Percent Lost;percentages;;
-Percent Regained;percentages;;
-Effect;sounds;;
+Percent Lost;percentage;;
+Percent Regained;percentage;;
+Effect;sound;;
 ;;;
 ;;;
-Item Received;resources;Amount Recevied;input
-Item Lost;resources;Amount Lost;input
-Projectile;loadables;;
-Projectile;loadables;;
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
-Potion Effect;potion_effects;Duration;durations
+Item Received;resource;Amount Recevied;input
+Item Lost;resource;Amount Lost;input
+Projectile;loadable;;
+Projectile;loadable;;
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
+Potion Effect;potion_effect;Duration;duration
 Amount Added;input;;
 Value;input;;
 Amount Added;input;;
@@ -158,8 +158,8 @@ Value;input;;
 Points Gained;input;;
 Points Gained;input;;
 Levels Lost;input;;
-Radius;no_knockback_distances;;
-Times the Player Should Gain 4 Hearts;input;;
+Radius;no_knockback_distance_radius;;
+Times the Player Should Gain 4 Health;input;;
 Levels Gained;input;;""";
 
 String conditionData = """0:	 Always True
@@ -267,7 +267,7 @@ Monster Type;monster_type;;
 ;;;
 Minimum Damage Taken (optional);input;;
 ;;;
-Chance;chances;;
+Chance;chance;;
 ;;;
 ;;;
 ;;;
@@ -281,7 +281,7 @@ Minimum Durability Damage Taken;input;;
 Resource;resource;Amount Required;input
 ;;;
 ;;;
-Monster Type;monster_type;Minimum Required in Range (optional);input
+Monster Type;monster_type;Minumum Required in Range (optional);input
 ;;;
 ;;;
 ;;;
@@ -299,7 +299,7 @@ Value Checked;input;;
 ;;;
 ;;;
 ;;;
-Minimum Required in Range (optional);input;;
+Minumum Required in Range (optional);input;;
 Cooldown in Ticks (optional);input;;
 ;;;
 ;;;
@@ -307,3 +307,169 @@ Cooldown in Ticks (optional);input;;
 Item;equipment;;
 ;;;
 Distance in cm;input;;""";
+
+String potionEffectData = """1:	 Speed I
+2:	 Speed II
+3:	 Speed V
+4:	 Strength I
+5:	 Strength II
+6:	 Strength X
+7:	 Resistance I
+8:	 Resistance II
+9:	 Resistance V
+10:	 Haste I
+11:	 Haste II
+12:	 Haste X
+13:	 Slowness I
+14:	 Slowness II
+15:	 Slowness X
+16:	 Weakness I
+17:	 Weakness II
+18:	 Weakness X
+19:	 Wither I
+20:	 Wither II
+21:	 Wither V
+22:	 Levitation I
+23:	 Levitation III
+24:	 Levitation V
+25:	 Absorption I
+26:	 Absorption II
+27:	 Absorption V
+28:	 Regeneration I
+29:	 Regeneration II
+30:	 Regeneration V
+31:	 Fire Resistance
+32:	 Set on Fire - Value2 key has no effect
+33:	 Instant Damage I
+34:	 Instant Damage II
+35:	 Instant Damage X
+36:	 Explosion - Value2 key sets explosion radius (max 10)""";
+
+String durationData = """1:	 1 Second
+2:	 5 Seconds
+3:	 10 Seconds
+4:	 30 Seconds
+5:	 1 Minute
+6:	 3 Minutes
+7:	 5 Minutes
+8:	 10 Minutes""";
+
+String monsterTypeData = """1:	 Undead
+2:	 Zombie (Includes variants)
+3:	 Skeleton (Includes variants)
+4:	 Arthropod
+5:	 Spider (Includes variants)
+6:	 Creeper
+7:	 Illager
+8:	 Witch
+9:	 Vex
+10:	 Aquatic Monster
+11:	 Nether Monster
+12:	 Ender Monster
+13:	 Piglin (Includes variants)
+14:	 Flying Monster
+15:	 Ravager
+16:	 Husk
+17:	 Stray
+18:	 Wither Skeleton""";
+
+String loadableData = """1:	 Arrow
+2:	 Spectral Arrow
+3:	 Firework Rocket
+4:	 Arrow of Slowness
+5:	 Arrow of Weakness
+6:	 Arrow of Harming
+7:	 Arrow of Healing
+8:	 Arrow of Poison
+9:	 Arrow of Levitation""";
+
+String soundData = """1:	*Fireburst
+2:	 Puff
+3:	*Glimmer
+4:	 Light Glimmer
+5:	 Rocket Exaust
+6:	*Gain Experience
+7:	*Pop
+8:	*Stomp
+9:	*Plant Break
+10:	*White Burst
+11:	*Black Burst
+12:	*Red Burst
+13:	*Orange Burst
+14:	*Yellow Burst
+15:	*Green Burst
+16:	*Blue Burst
+17:	*Purple Burst
+18:	*Pink Burst
+19:	*Brown Burst
+20:	 White Shimmer
+21:	 Black Shimmer
+22:	 Red Shimmer
+23:	 Orange Shimmer
+24:	 Yellow Shimmer
+25:	 Green Shimmer
+26:	 Blue Shimmer
+27:	 Purple Shimmer
+28:	 Pink Shimmer
+29:	 Brown Shimmer
+30:	*Wormhole
+31:	*Totem Break
+32:	*Smack
+33:	 Rocket Exaust 2
+34:	*Fire Attack
+35:	*Ice Attack
+36:	*Earth Attack
+37:	*Water Attack
+38:	*Blade Attack
+39:	*Flash Attack
+40:	*Dark Attack (Musical)
+41:	*Light Attack (Musical)
+42:	*Adventurous Attack (Musical)
+43:	*Exotic Attack (Musical)""";
+
+String resourceData = """1:	 Gold Ingot
+2:	 Gold Nugget
+3:	 Iron Ingot
+4:	 Iron Nugget
+5:	 Emerald
+6:	 Diamond
+7:	 Fire Charge
+8:	 Coal
+9:	 Gunpowder
+10:	 Bone
+11:	 Arrow
+12:	 Magic Scroll (Renamed mojang_banner_pattern)""";
+
+String equipmentData = """1:	 Sword
+2:	 Axe
+3:	 Pickaxe
+4:	 Shovel
+5:	 Hoe
+6:	 Helmet
+7:	 Chestplate
+8:	 Leggings
+9:	 Boots
+10:	 Wooden Equipment (Tools, Melee Weapons, Armor)
+11:	 Leather Equipment
+12:	 Stone Equipment
+13:	 Chainmail Equipment
+14:	 Iron Equipment
+15:	 Diamond Equipment
+16:	 Netherite Equipment
+17:	 Golden Equipment
+18:	 Bow
+19:	 Crossbow
+20:	 Trident
+21:	 Shield
+22:	 Potion or Water Bottle
+23:	 Totem of Undying
+24:	 Golden Apple or Enchanted Golden Apple
+25:	 Fishing Rod
+26:	 Flint and Steel
+27:	 Empty Bucket
+28:	 Water Bucket (Includes fish buckets)
+29:	 Lava Bucket
+30:	 Milk Bucket
+31:	 Torch or Lantern
+32:	 Elytra
+33:	 Arrow, Spectral Arrow or Tipped Arrow""";
