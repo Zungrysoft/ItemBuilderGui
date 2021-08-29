@@ -82,11 +82,11 @@ String effectData = """0:	 No Effect
 
 String effectDataRaw = """;;;
 Amount;input;;
+Percent Increase;input;;
+Percent Increase;input;;
 Amount;input;;
 Amount;input;;
-Amount;input;;
-Amount;input;;
-Amount;input;;
+Percent Increase;input;;
 ;;;
 ;;;
 ;;;
