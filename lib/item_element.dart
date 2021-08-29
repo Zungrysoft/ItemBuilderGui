@@ -71,7 +71,6 @@ abstract class ItemElement {
           autofocus: true,
           maxLines: 1,
           cursorColor: Colors.blue,
-          focusNode:  FocusNode(),
           controller: con,
           keyboardType: TextInputType.number,
           style: TextStyle(fontSize: 20),

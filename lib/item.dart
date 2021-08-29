@@ -29,7 +29,6 @@ class Item {
           autofocus: true,
           maxLines: 1,
           cursorColor: Colors.blue,
-          focusNode:  FocusNode(),
           controller: controller,
           style: TextStyle(fontSize: 20),
           onChanged: (newValue) {
