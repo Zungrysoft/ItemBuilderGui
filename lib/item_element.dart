@@ -100,6 +100,9 @@ abstract class ItemElement {
       if (inputType == "monster_type") {
         possibilityList = getMonsterTypeIdList();
       }
+      if (inputType == "loadable") {
+        possibilityList = getLoadableIdList();
+      }
       if (inputType == "sound") {
         possibilityList = getSoundIdList();
       }

@@ -132,6 +132,13 @@ List<String> getMonsterTypeIdList() {
   return monsterTypeIdsList;
 }
 
+List<String> getLoadableIdList() {
+  if (!populatedData) {
+    populateData();
+  }
+  return loadableIdsList;
+}
+
 List<String> getSoundIdList() {
   if (!populatedData) {
     populateData();
