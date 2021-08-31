@@ -71,12 +71,12 @@ String effectData = """0:	 No Effect
 70:	 [Currently Unused]
 71:	 [Currently Unused]
 72:	 [Currently Unused]
-73:	 [Currently Unused]
-74:	 [Currently Unused]
+73:	 Resistance - Value sets amplifier (max 4)
+74:	 Plus or Minus Armor Toughness - Value sets increase in points
 75:	*Regain Hunger - Value sets number of hunger points gained
 76:	*Player gains a certain number of experience points - Value sets points (max 256)
 77:	*Player loses a certain number of experience levels - Value sets levels lost. (max 256)
-78:	 Nearby monsters are immune to knockback - Values sets effect radius (1: 7 blocks, 2: 15 blocks, 3: infinite distance)
+78:	 Nearby monsters are immune to knockback - Values sets effect radius (1: 7 blocks, 2: 15 blocks, 3: unlimited distance)
 79:	*Heal 4 Health Points - Value determines healing. (Healing = Value * 4)
 80:	*Player gains a certain number of experience levels - Value sets levels (max 256)""";
 
@@ -153,8 +153,8 @@ Value;input;;
 ;;;
 ;;;
 ;;;
-;;;
-;;;
+Amplifier (max 4);input;;
+Amount;input;;
 Points Gained;input;;
 Points Gained;input;;
 Levels Lost;input;;
@@ -167,15 +167,15 @@ String conditionData = """0:	 Always True
 2:	 On Ground
 3:	 On Fire
 4:	 Standing in Light Level 8 or Greater
-5:	 Sprinting
+5:	 Sprinting while on Ground - (Note: Attacking causes you to stop sprinting, but there is a bug with the game that makes it look like you are still sprinting)
 6:	 Sneaking/Crouching
 7:	*Timer - Value determines how many ticks between each trigger
 8:	 Has a certain number of experience levels - Value determines required level
 9:	 There are a certain number of monsters within 20 blocks - Value determines count
-10:	*Dealt Damage With a Melee Attack - Value is optional and sets minimum damage that must be dealt by the hit to trigger this condition
+10:	*Dealt Damage With a Melee Attack - Value is optional and sets minimum damage that must be dealt
 11:	*Killed Mob or Player
 12:	*Killed Mob of a Specific Type - See "Monster Types" list below for use of Value key
-13:	 [Currently Unused]
+13:	*Blocked Damage with Shield - Value is optional and sets minimum damage that must be blocked
 14:	 [Currently Unused]
 15:	 [Currently Unused]
 16:	 [Currently Unused]
@@ -195,7 +195,7 @@ String conditionData = """0:	 Always True
 30:	*Took Damage - Value is optional and sets minimum damage that must be taken by the hit to trigger this condition
 31:	*Took Damage From a Monster
 32:	 Percentage Random Chance - Values: (1: 0.1%, 2: 1%, 3: 5%, 4: 10%, 5: 25%, 6: 33%, 7: 50%)
-33:	*Trigger was set earlier by this item (See Effect #33)
+33:	 Trigger was set earlier by this item (See Effect #33)
 34:	 Item is Primed (See Effect #34)
 35:	 Item has been Activated (See Effect #35)
 36:	 Has a certain amount of health - Value sets minimum health
@@ -208,7 +208,7 @@ String conditionData = """0:	 Always True
 43:	 Has Item - See "Resources" list below for use of Value key; Value2 determines the amount they must have
 44:	 [Currently Unused]
 45:	*Broke Monster Spawner
-46:	 A Mob of a Specific Type is Within 15 Blocks - See "Monster Types" list below for use of Value key; Value2 is optional and sets minimum count in range
+46:	 A Mob of a Specific Type is Within 15 Blocks - See "Monster Types" list below for use of Value key; Value2 is optional and sets minumum count in range
 47:	 [Currently Unused]
 48:	 [Currently Unused]
 49:	 [Currently Unused]
@@ -226,7 +226,7 @@ String conditionData = """0:	 Always True
 61:	 [Currently Unused]
 62:	 [Currently Unused]
 63:	 [Currently Unused]
-64:	 A Burning Entity is within 15 blocks - Value sets minimum count in range
+64:	 A Burning Entity is within 15 blocks - Value sets minumum count in range
 65:	*Used a Carrot on a Stick - Value sets cooldown in ticks before it can be used again
 66:	*Took Blast Damage
 67:	*Took Fire Damage
@@ -248,7 +248,7 @@ Required Monsters;input;;
 Minimum Damage Dealt (optional);input;;
 ;;;
 Monster Type;monster_type;;
-;;;
+Minimum Damage Blocked (optional);input;;
 ;;;
 ;;;
 ;;;
@@ -343,7 +343,10 @@ String potionEffectData = """1:	 Speed I
 33:	 Instant Damage I
 34:	 Instant Damage II
 35:	 Instant Damage X
-36:	 Explosion - Value2 key sets explosion radius (max 10)""";
+36:	 Explosion - Value2 key sets explosion power
+37:	 Instant Health I (Use Effect #79 instead if possible)
+38:	 Instant Health II (Use Effect #79 instead if possible)
+39:	 Instant Health X (Use Effect #79 instead if possible)""";
 
 String durationData = """1:	 1 Second
 2:	 5 Seconds
@@ -371,7 +374,9 @@ String monsterTypeData = """1:	 Undead
 15:	 Ravager
 16:	 Husk
 17:	 Stray
-18:	 Wither Skeleton""";
+18:	 Wither Skeleton
+19:	 Blaze
+20:	 Silverfish""";
 
 String loadableData = """1:	 Arrow
 2:	 Spectral Arrow
@@ -425,7 +430,8 @@ String soundData = """1:	*Fireburst
 40:	*Dark Attack (Musical)
 41:	*Light Attack (Musical)
 42:	*Adventurous Attack (Musical)
-43:	*Exotic Attack (Musical)""";
+43:	*Exotic Attack (Musical)
+44:	*Blood Attack""";
 
 String resourceData = """1:	 Gold Ingot
 2:	 Gold Nugget
