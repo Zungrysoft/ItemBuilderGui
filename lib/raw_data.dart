@@ -169,7 +169,7 @@ String conditionData = """0:	 Always True
 4:	 Standing in Light Level 8 or Greater
 5:	 Sprinting while on Ground - (Note: Attacking causes you to stop sprinting, but there is a bug with the game that makes it look like you are still sprinting)
 6:	 Sneaking/Crouching
-7:	*Timer - Value determines how many ticks between each trigger
+7:	*Timer - Value determines time in ticks between each trigger; Value2 sets offset in ticks
 8:	 Has a certain number of experience levels - Value determines required level
 9:	 There are a certain number of monsters within 20 blocks - Value determines count
 10:	*Dealt Damage With a Melee Attack - Value is optional and sets minimum damage that must be dealt
@@ -242,7 +242,7 @@ String conditionDataRaw = """;;;
 ;;;
 ;;;
 ;;;
-Ticks Between Each Trigger;input;;
+Ticks Between Each Trigger;input;Offset in Ticks;input
 Required Level;input;;
 Required Monsters;input;;
 Minimum Damage Dealt (optional);input;;
@@ -431,7 +431,15 @@ String soundData = """1:	*Fireburst
 41:	*Light Attack (Musical)
 42:	*Adventurous Attack (Musical)
 43:	*Exotic Attack (Musical)
-44:	*Blood Attack""";
+44:	*Blood Attack
+45:	*Slime Attack
+46:	*Honey Attack
+47:	*Bramble Attack
+48:	*Strike Attack
+49:	*Web Attack
+50:	*Advancement
+51:	*Beacon 1
+52:	*Beacon 2""";
 
 String resourceData = """1:	 Gold Ingot
 2:	 Gold Nugget
