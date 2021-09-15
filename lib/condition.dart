@@ -87,13 +87,17 @@ class Condition extends ItemElement {
               id = newValue!;
             });
           },
-          items: List<int>.generate(getConditionCount(), (i) => i + 1)
+          items: List<int>.generate(getConditionCountTotal(), (i) => i + 1)
               .map<DropdownMenuItem<int>>((int value) {
-            return DropdownMenuItem<int>(
-              value: value-1,
-              child: Text(getConditionIdString(value-1)),
-            );
-          })
+                var val = value-1;
+                if (val >= getConditionCount()) {
+                  val = (val - getConditionCount()) + 1001;
+                }
+                return DropdownMenuItem<int>(
+                  value: val,
+                  child: Text(getConditionIdString(value-1)),
+                );
+              })
               .toList(),
         ),
       ]));

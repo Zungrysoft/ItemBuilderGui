@@ -58,10 +58,10 @@ String effectData = """0:	 No Effect
 57:	*Set value of Counter2 - Value key sets value Counter2 is set to
 58:	*Add to or Remove from Counter3 - Value key sets amount added (See Condition #58)
 59:	*Set value of Counter3 - Value key sets value Counter3 is set to
-60:	 [Currently Unused]
-61:	 [Currently Unused]
-62:	 [Currently Unused]
-63:	 [Currently Unused]
+60:	 [Reserved]
+61:	 [Reserved]
+62:	 [Reserved]
+63:	 [Reserved]
 64:	 [Currently Unused]
 65:	 [Currently Unused]
 66:	 [Currently Unused]
@@ -70,7 +70,7 @@ String effectData = """0:	 No Effect
 69:	 [Currently Unused]
 70:	 [Currently Unused]
 71:	 [Currently Unused]
-72:	 [Currently Unused]
+72:	*Increase or Decrease Item Count - Value sets amount added
 73:	 Resistance - Value sets amplifier (max 4)
 74:	 Plus or Minus Armor Toughness - Value sets increase in points
 75:	*Regain Hunger - Value sets number of hunger points gained
@@ -78,7 +78,9 @@ String effectData = """0:	 No Effect
 77:	*Player loses a certain number of experience levels - Value sets levels lost. (max 256)
 78:	 Nearby monsters are immune to knockback - Values sets effect radius (1: 7 blocks, 2: 15 blocks, 3: unlimited distance)
 79:	*Heal 4 Health Points - Value determines healing. (Healing = Value * 4)
-80:	*Player gains a certain number of experience levels - Value sets levels (max 256)""";
+80:	*Player gains a certain number of experience levels - Value sets levels (max 256)
+81:	*Roll random number [0 <= n < max] (See Condition #81) - Value sets max (This will never actually roll max, only 1 less than it. This value only survives for one tick.)
+82:	 [Reserved]""";
 
 String effectDataRaw = """;;;
 Amount;input;;
@@ -152,7 +154,7 @@ Value;input;;
 ;;;
 ;;;
 ;;;
-;;;
+Amount Gained;input;;
 Amplifier (max 4);input;;
 Amount;input;;
 Points Gained;input;;
@@ -160,7 +162,9 @@ Points Gained;input;;
 Levels Lost;input;;
 Radius;no_knockback_distance_radius;;
 Times the Player Should Gain 4 Health;input;;
-Levels Gained;input;;""";
+Levels Gained;input;;
+max;input;;
+;;;""";
 
 String conditionData = """0:	 Always True
 1:	 Underwater
@@ -171,15 +175,15 @@ String conditionData = """0:	 Always True
 6:	 Sneaking/Crouching
 7:	*Timer - Value determines time in ticks between each trigger; Value2 sets offset in ticks
 8:	 Has a certain number of experience levels - Value determines required level
-9:	 There are a certain number of monsters within 20 blocks - Value determines count
+9:	 There are a certain number of monsters within 15 blocks - Value determines count
 10:	*Dealt Damage With a Melee Attack - Value is optional and sets minimum damage that must be dealt
 11:	*Killed Mob or Player
 12:	*Killed Mob of a Specific Type - See "Monster Types" list below for use of Value key
 13:	*Blocked Damage with Shield - Value is optional and sets minimum damage that must be blocked
-14:	 [Currently Unused]
-15:	 [Currently Unused]
-16:	 [Currently Unused]
-17:	 [Currently Unused]
+14:	 This Crossbow is Loaded
+15:	*Player loads a crossbow
+16:	 Eating food
+17:	 Drinking a potion
 18:	 [Currently Unused]
 19:	 [Currently Unused]
 20:	 [Currently Unused]
@@ -206,15 +210,15 @@ String conditionData = """0:	 Always True
 41:	*Ate Food
 42:	*Drank Potion
 43:	 Has Item - See "Resources" list below for use of Value key; Value2 determines the amount they must have
-44:	 [Currently Unused]
+44:	 [Reserved]
 45:	*Broke Monster Spawner
 46:	 A Mob of a Specific Type is Within 15 Blocks - See "Monster Types" list below for use of Value key; Value2 is optional and sets minumum count in range
-47:	 [Currently Unused]
-48:	 [Currently Unused]
-49:	 [Currently Unused]
-50:	 [Currently Unused]
-51:	 [Currently Unused]
-52:	 [Currently Unused]
+47:	 Another Player is within 20 Blocks - Value2 is optional and sets minimum count in range
+48:	 Bow is being drawn back
+49:	 Crossbow is being loaded
+50:	 Trident is being drawn back
+51:	 Shield is being held up
+52:	 Spyglass is being looked through
 53:	 [Currently Unused]
 54:	 Counter1 is equal to a certain value - Value key sets the value checked (See Effect #54)
 55:	 Counter1 is greater than or equal to a certain value - Value key sets this value
@@ -222,10 +226,10 @@ String conditionData = """0:	 Always True
 57:	 Counter2 is greater than or equal to a certain value - Value key sets this value
 58:	 Counter3 is equal to a certain value - Value key sets the value checked (See Effect #58)
 59:	 Counter3 is greater than or equal to a certain value - Value key sets this value
-60:	 [Currently Unused]
-61:	 [Currently Unused]
-62:	 [Currently Unused]
-63:	 [Currently Unused]
+60:	 [Reserved]
+61:	 [Reserved]
+62:	 [Reserved]
+63:	 [Reserved]
 64:	 A Burning Entity is within 15 blocks - Value sets minumum count in range
 65:	*Used a Carrot on a Stick - Value sets cooldown in ticks before it can be used again
 66:	*Took Blast Damage
@@ -233,7 +237,18 @@ String conditionData = """0:	 Always True
 68:	*Took Projectile Damage
 69:	 Have specific item in mainhand - See "Equipment" list for use of Value key
 70:	 In Lava
-71:	*Fall Certain Distance - Value sets distance in cm. (Notes: This trigger activates when the player hits the ground from their fall. It only triggers if the player fell more than one block. It will not trigger if the player is in Creative Mode.)""";
+71:	*Fall Certain Distance - Value sets distance in cm. (Notes: This trigger activates when the player hits the ground from their fall. It only triggers if the player fell more than one block. It will not trigger if the player is in Creative Mode.)
+72:	 [Reserved]
+73:	 [Currently Unused]
+74:	 [Currently Unused]
+75:	 [Currently Unused]
+76:	 [Currently Unused]
+77:	 [Currently Unused]
+78:	 [Currently Unused]
+79:	 [Currently Unused]
+80:	 [Currently Unused]
+81:	 Rolled random number equals certain number (See Effect #81) - Value sets number checked against
+82:	 Rolled random number is greater than or equal to certain number (See Effect #81) - Value sets number checked""";
 
 String conditionDataRaw = """;;;
 ;;;
@@ -282,7 +297,7 @@ Resource;resource;Amount Required;input
 ;;;
 ;;;
 Monster Type;monster_type;Minumum Required in Range (optional);input
-;;;
+;;Minumum Required in Range (optional);input
 ;;;
 ;;;
 ;;;
@@ -306,7 +321,18 @@ Cooldown in Ticks (optional);input;;
 ;;;
 Item;equipment;;
 ;;;
-Distance in cm;input;;""";
+Distance in cm;input;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+Value Checked;input;;
+Value Checked;input;;""";
 
 String potionEffectData = """1:	 Speed I
 2:	 Speed II
@@ -346,7 +372,8 @@ String potionEffectData = """1:	 Speed I
 36:	 Explosion - Value2 key sets explosion power
 37:	 Instant Health I (Use Effect #79 instead if possible)
 38:	 Instant Health II (Use Effect #79 instead if possible)
-39:	 Instant Health X (Use Effect #79 instead if possible)""";
+39:	 Instant Health X (Use Effect #79 instead if possible)
+40:	 Lightning Strike - Value2 key has no effect""";
 
 String durationData = """1:	 1 Second
 2:	 5 Seconds
@@ -386,7 +413,8 @@ String loadableData = """1:	 Arrow
 6:	 Arrow of Harming
 7:	 Arrow of Healing
 8:	 Arrow of Poison
-9:	 Arrow of Levitation""";
+9:	 Arrow of Levitation
+10:	 Arrow from Inventory""";
 
 String soundData = """1:	*Fireburst
 2:	 Puff
@@ -439,7 +467,8 @@ String soundData = """1:	*Fireburst
 49:	*Web Attack
 50:	*Advancement
 51:	*Beacon 1
-52:	*Beacon 2""";
+52:	*Beacon 2
+53:	 Small Raincloud""";
 
 String resourceData = """1:	 Gold Ingot
 2:	 Gold Nugget

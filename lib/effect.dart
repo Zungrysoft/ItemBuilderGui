@@ -61,13 +61,17 @@ class Effect extends ItemElement {
             id = newValue!;
           });
         },
-        items: List<int>.generate(getEffectCount(), (i) => i + 1)
+        items: List<int>.generate(getEffectCountTotal(), (i) => i + 1)
             .map<DropdownMenuItem<int>>((int value) {
-          return DropdownMenuItem<int>(
-            value: value-1,
-            child: Text(getEffectIdString(value-1)),
-          );
-        })
+              var val = value-1;
+              if (val >= getEffectCount()) {
+                val = (val - getEffectCount()) + 1001;
+              }
+              return DropdownMenuItem<int>(
+                value: val,
+                child: Text(getEffectIdString(value-1)),
+              );
+            })
             .toList(),
       ),
     ]));

@@ -4,6 +4,8 @@ import 'package:item_builder_gui/raw_data.dart';
 
 bool populatedData = false;
 
+int userDefinedCount = 20;
+
 List<String> effectIdsList = [];
 List<List<String>> effectIdsListRaw = [];
 List<String> conditionIdsList = [];
@@ -16,7 +18,7 @@ List<String> soundIdsList = [];
 List<String> resourceIdsList = [];
 List<String> equipmentIdsList = [];
 
-List<String> stripListData(data) {
+List<String> stripListData(data, [bool userData = false]) {
   LineSplitter ls = new LineSplitter();
   List<String> lines = ls.convert(data);
   List<String> ret = [];
@@ -31,6 +33,14 @@ List<String> stripListData(data) {
     // Append
     ret.add(d);
   }
+  // User-defined entries
+  if (userData == true) {
+    for (int i = 0; i < userDefinedCount; i ++) {
+      // Append
+      ret.add("User-Defined " + (i+1).toString());
+    }
+  }
+
   return ret;
 }
 
@@ -40,10 +50,10 @@ void populateData() {
   List<String> lines = [];
 
   // Effect Id's
-  effectIdsList = stripListData(effectData);
+  effectIdsList = stripListData(effectData, true);
 
   // Condition Id's
-  conditionIdsList = stripListData(conditionData);
+  conditionIdsList = stripListData(conditionData, true);
 
   // Other Id's
   potionEffectIdsList = stripListData(potionEffectData);
@@ -82,18 +92,26 @@ String getConditionIdString(int c) {
   return conditionIdsList[c];
 }
 
-int getEffectCount() {
+int getEffectCountTotal() {
   if (!populatedData) {
     populateData();
   }
   return effectIdsList.length;
 }
 
-int getConditionCount() {
+int getEffectCount() {
+  return getEffectCountTotal() - userDefinedCount;
+}
+
+int getConditionCountTotal() {
   if (!populatedData) {
     populateData();
   }
   return conditionIdsList.length;
+}
+
+int getConditionCount() {
+  return getConditionCountTotal() - userDefinedCount;
 }
 
 
@@ -101,12 +119,20 @@ String getEffectValueString(int c, int p) {
   if (!populatedData) {
     populateData();
   }
+  if (c > 1000) {
+    var r = ["Value","input","Value2","input"];
+    return r[p];
+  }
   return effectIdsListRaw[c][p];
 }
 
 String getConditionValueString(int c, int p) {
   if (!populatedData) {
     populateData();
+  }
+  if (c > 1000) {
+    var r = ["Value","input","Value2","input"];
+    return r[p];
   }
   return conditionIdsListRaw[c][p];
 }

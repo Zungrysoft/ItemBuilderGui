@@ -38,7 +38,7 @@ abstract class ItemElement {
     }
 
     // Hard-coded special cases
-    if (inputType == "duration" && this is Effect && v == 2 && value == 32) {
+    if (inputType == "duration" && this is Effect && v == 2 && (value == 32 || value == 40)) {
       inputType = "";
     }
     if (inputType == "duration" && this is Effect && v == 2 && value == 36) {
