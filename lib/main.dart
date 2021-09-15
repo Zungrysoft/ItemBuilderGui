@@ -9,14 +9,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var _version = "v1.1";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ItemBuilder Command Generator',
+      title: 'ItemBuilder Command Generator' + _version.toString(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'ItemBuilder Command Generator'),
+      home: MyHomePage(title: 'ItemBuilder Command Generator' + _version.toString()),
     );
   }
 }
